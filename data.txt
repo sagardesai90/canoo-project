@@ -1,0 +1,21 @@
+{
+    "lights": [
+        {
+            "name": "Kitchen",
+            "state": "on"
+        },
+        {
+            "name": "Living Room",
+            "state": "off"
+        },
+        {
+            "name": "Bedroom",
+            "state": "off"
+        }
+    ],
+    "thermostat": [
+        {
+            "temperature": "45°"
+        }
+    ]
+}
