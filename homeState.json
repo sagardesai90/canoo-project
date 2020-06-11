@@ -1,0 +1,13 @@
+{
+    "rooms": {
+        "Kitchen": "off",
+        "Living Room": "off",
+        "Bedroom": "on",
+        "Patio": "off",
+        "Garage": "off",
+        "Backyard": "on"
+    },
+    "thermostat": {
+        "temperature": "77"
+    }
+}

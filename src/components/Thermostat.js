@@ -23,6 +23,7 @@ export default class Thermostat extends Component {
       cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ newTemp: this.state.newTemp }),
     })
@@ -31,7 +32,8 @@ export default class Thermostat extends Component {
           console.log(data);
         })
       )
-      .then(() => this.getNewData());
+      .then(() => this.getNewData())
+      .catch((error) => console.log(error, "error"));
   }
 
   async getNewData() {

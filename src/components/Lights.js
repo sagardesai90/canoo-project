@@ -25,15 +25,12 @@ export default class Lights extends Component {
       cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ room: [roomKey, this.state.rooms[roomKey]] }),
     })
-      .then((res) =>
-        res.json().then((data) => {
-          console.log(data);
-        })
-      )
-      .then(() => this.getNewData());
+      .then(() => this.getNewData())
+      .catch((error) => console.log(error, "error"));
   }
 
   async addRoom() {
@@ -42,15 +39,12 @@ export default class Lights extends Component {
       cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ newRoom: this.state.newRoom }),
     })
-      .then((res) =>
-        res.json().then((data) => {
-          console.log(data);
-        })
-      )
-      .then(() => this.getNewData());
+      .then(() => this.getNewData())
+      .catch((error) => console.log(error, "error"));
   }
 
   async getNewData() {
@@ -78,11 +72,11 @@ export default class Lights extends Component {
                   {roomNames[i]}
                   <div className="btn-wrapper">
                     <div className="btn-wrapper__container">
-                      <div className="btn-inner">
-                        <a
-                          className="btn-inner__text"
-                          onClick={() => this.lightSwitch(roomNames[i])}
-                        >
+                      <div
+                        className="btn-inner"
+                        onClick={() => this.lightSwitch(roomNames[i])}
+                      >
+                        <a className="btn-inner__text">
                           {this.state.rooms[keyName]}{" "}
                         </a>
                       </div>
