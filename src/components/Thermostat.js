@@ -58,13 +58,18 @@ export default class Thermostat extends Component {
     return (
       <div>
         {tempRender()}
-        <input
-          type="text"
-          name="name"
-          onChange={this.handleChange.bind(this)}
-          placeHolder="Set Temp"
-        />
-        <button onClick={this.setTemp}>Set Temp</button>
+        <label className="pure-material-textfield-outlined">
+          <input
+            type="text"
+            name="name"
+            onChange={this.handleChange.bind(this)}
+            placeHolder=" "
+          />
+          <span>Temperature</span>
+        </label>
+        <button className="temp-button" onClick={this.setTemp}>
+          Set Temp
+        </button>
       </div>
     );
   }

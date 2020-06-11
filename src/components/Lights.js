@@ -92,13 +92,18 @@ export default class Lights extends Component {
               ))}
             </h1>
             <div>
-              <input
-                type="text"
-                name="name"
-                placeHolder="Add Room"
-                onChange={this.handleChange.bind(this)}
-              />
-              <button onClick={this.addRoom}>Add</button>
+              <label class="pure-material-textfield-outlined">
+                <input
+                  type="text"
+                  name="name"
+                  placeHolder=" "
+                  onChange={this.handleChange.bind(this)}
+                />
+                <span>Add Room</span>
+              </label>
+              <button className="add-button" onClick={this.addRoom}>
+                Add
+              </button>
             </div>
           </div>
         );

@@ -1,8 +1,8 @@
 {
     "rooms": {
-        "Kitchen": "off",
-        "LivingRoom": "on",
-        "Bedroom": "on"
+        "Kitchen": "on",
+        "Living Room": "off",
+        "Bedroom": "off"
     },
     "thermostat": {
         "temperature": "45"

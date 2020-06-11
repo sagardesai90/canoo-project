@@ -14,7 +14,7 @@ data['rooms'].update({
 })
 
 data['rooms'].update({
-    'LivingRoom': 'off',
+    'Living Room': 'off',
 })
 
 data['rooms'].update({
@@ -102,5 +102,3 @@ def temp():
 #     with open('data.json', 'w') as outfile:
 #         json.dump(data, outfile, indent=4, ensure_ascii=False)
 #     return data
-with open('data.json', 'w') as outfile:
-    json.dump(data, outfile, indent=4, ensure_ascii=False)
