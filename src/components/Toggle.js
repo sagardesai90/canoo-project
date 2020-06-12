@@ -27,7 +27,14 @@ export default class Toggle extends Component {
     return (
       <div class="toggleWrapper">
         <input type="checkbox" className="dn" id="dn" />
-        <label for="dn" className="toggle">
+        <label
+          for="dn"
+          className="toggle"
+          onClick={() => {
+            this.props.setMode();
+            this.clicked();
+          }}
+        >
           <span
             className="toggle__handler"
             onClick={() => {

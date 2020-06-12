@@ -2,8 +2,8 @@
     "rooms": {
         "Kitchen": "off",
         "Living Room": "on",
-        "Bedroom": "off",
-        "Garage": "on",
+        "Bedroom": "on",
+        "Garage": "off",
         "Patio": "on"
     },
     "thermostat": {
