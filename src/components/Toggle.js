@@ -4,12 +4,18 @@ import "./Toggle.scss";
 export default class Toggle extends Component {
   constructor(props) {
     super(props);
-    this.state = { darkMode: false };
-    this.setMode = this.setMode.bind(this);
+    this.state = { darkMode: props.darkMode };
+    this.clicked = this.clicked.bind(this);
   }
 
-  setMode = () => {
-    this.setState({ darkMode: !this.state.darkMode });
+  componentDidUpdate(prevProps) {
+    if (prevProps.darkMode != this.props.darkMode) {
+      this.setState({ darkMode: this.props.darkMode });
+    }
+  }
+
+  clicked = () => {
+    // this.setState({ darkMode: !this.state.darkMode });
     if (this.state.darkMode == true) {
       document.body.style.backgroundColor = "#10131c";
     } else {
@@ -22,7 +28,13 @@ export default class Toggle extends Component {
       <div class="toggleWrapper">
         <input type="checkbox" className="dn" id="dn" />
         <label for="dn" className="toggle">
-          <span className="toggle__handler" onClick={this.setMode}>
+          <span
+            className="toggle__handler"
+            onClick={() => {
+              this.props.setMode();
+              this.clicked();
+            }}
+          >
             <span className="crater crater--1"></span>
             <span className="crater crater--2"></span>
             <span className="crater crater--3"></span>

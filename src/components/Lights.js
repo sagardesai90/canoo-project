@@ -4,7 +4,7 @@ import "./Lights.scss";
 export default class Lights extends Component {
   constructor(props) {
     super(props);
-    this.state = { rooms: null, newRoom: null };
+    this.state = { rooms: null, newRoom: null, darkMode: props.darkMode };
     this.handleChange = this.handleChange.bind(this);
     this.addRoom = this.addRoom.bind(this);
     this.getNewData = this.getNewData.bind(this);
@@ -15,6 +15,12 @@ export default class Lights extends Component {
         this.setState({ rooms: data.rooms });
       })
     );
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.darkMode != this.props.darkMode) {
+      this.setState({ darkMode: this.props.darkMode });
+    }
   }
 
   async lightSwitch(roomKey) {
@@ -68,10 +74,29 @@ export default class Lights extends Component {
           <div>
             <h1 className="grid-container">
               {Object.keys(this.state.rooms).map((keyName, i) => (
-                <ul key={i} className="room-name">
+                <ul
+                  key={i}
+                  className={
+                    this.state.darkMode == false
+                      ? "room-name-dusk"
+                      : "room-name"
+                  }
+                >
                   {roomNames[i]}
-                  <div className="btn-wrapper">
-                    <div className="btn-wrapper__container">
+                  <div
+                    className={
+                      this.state.darkMode == true
+                        ? "btn-wrapper"
+                        : "btn-wrapper-dusk"
+                    }
+                  >
+                    <div
+                      className={
+                        this.state.darkMode == true
+                          ? "btn-wrapper__container"
+                          : "btn-wrapper-dusk__container"
+                      }
+                    >
                       <div
                         className="btn-inner"
                         onClick={() => this.lightSwitch(roomNames[i])}
@@ -86,7 +111,13 @@ export default class Lights extends Component {
               ))}
             </h1>
             <div>
-              <label class="pure-material-textfield-outlined">
+              <label
+                className={
+                  this.state.darkMode == true
+                    ? "pure-material-textfield-outlined"
+                    : "pure-material-textfield-outlined-dusk"
+                }
+              >
                 <input
                   type="text"
                   name="name"
@@ -95,7 +126,12 @@ export default class Lights extends Component {
                 />
                 <span>Add Room</span>
               </label>
-              <button className="add-button" onClick={this.addRoom}>
+              <button
+                className={
+                  this.state.darkMode == true ? "add-button" : "add-button-dusk"
+                }
+                onClick={this.addRoom}
+              >
                 Add
               </button>
             </div>

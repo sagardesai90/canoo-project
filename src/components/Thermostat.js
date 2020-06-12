@@ -4,7 +4,7 @@ import "./Thermostat.css";
 export default class Thermostat extends Component {
   constructor(props) {
     super(props);
-    this.state = { temperature: null, newTemp: null };
+    this.state = { temperature: null, newTemp: null, darkMode: props.darkMode };
     this.setTemp = this.setTemp.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getNewData = this.getNewData.bind(this);
@@ -17,6 +17,13 @@ export default class Thermostat extends Component {
       })
     );
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.darkMode != this.props.darkMode) {
+      this.setState({ darkMode: this.props.darkMode });
+    }
+  }
+
   async setTemp() {
     let tempFetch = await fetch("http://localhost:5000/adjust_temp", {
       method: "PUT",
@@ -51,7 +58,11 @@ export default class Thermostat extends Component {
     const tempRender = () => {
       if (this.state.temperature != null) {
         return (
-          <h1 className="temperature">
+          <h1
+            className={
+              this.state.darkMode == true ? "temperature" : "temperature-dusk"
+            }
+          >
             Current temperature: {this.state.temperature}°
           </h1>
         );
@@ -60,7 +71,13 @@ export default class Thermostat extends Component {
     return (
       <div>
         {tempRender()}
-        <label className="pure-material-textfield-outlined">
+        <label
+          className={
+            this.state.darkMode == true
+              ? "pure-material-textfield-outlined"
+              : "pure-material-textfield-outlined-dusk"
+          }
+        >
           <input
             type="text"
             name="name"
@@ -69,7 +86,12 @@ export default class Thermostat extends Component {
           />
           <span>Temperature</span>
         </label>
-        <button className="temp-button" onClick={this.setTemp}>
+        <button
+          className={
+            this.state.darkMode == true ? "temp-button" : "temp-button-dusk"
+          }
+          onClick={this.setTemp}
+        >
           Set Temp
         </button>
       </div>

@@ -6,9 +6,14 @@
 // Variables
 $blue: #15b5e2;
 $btn-bg: #10131c;
+$orange: #ffbf00;
 
 .room-name {
   color: $blue;
+}
+
+.room-name-dusk {
+  color: $orange;
 }
 
 .btn-wrapper {
@@ -75,8 +80,82 @@ $btn-bg: #10131c;
   }
 }
 
+.btn-wrapper-dusk {
+  width: 290px;
+  height: 110px;
+  position: relative;
+  margin: 40px auto 0;
+
+  &:hover {
+    .btn-inner {
+      top: -4px;
+      transform: scale(1, 1);
+      cursor: pointer;
+    }
+  }
+
+  &__container {
+    border-bottom: 2px solid $orange;
+    position: absolute;
+    width: 100%;
+    height: 80px;
+
+    &:before,
+    &:after {
+      border-bottom: 2px solid $orange;
+      width: 96%;
+      left: 2%;
+      bottom: -8px;
+      content: "";
+      position: absolute;
+    }
+
+    &:after {
+      width: 92%;
+      left: 4%;
+      bottom: -14px;
+    }
+
+    .btn-inner {
+      width: 104.2%;
+      height: 100%;
+      position: absolute;
+      top: 20px;
+      left: -2.1%;
+      border: 2px solid $orange;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Source Code Pro", monospace;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 18px;
+      background: $btn-bg;
+      transform: scale(0.96, 0.96);
+      transition: all 0.3s;
+      z-index: 4;
+
+      &__text {
+        text-decoration: none;
+        color: $orange;
+      }
+    }
+  }
+}
+
 .add-button {
-  background-color: #15b5e2;
+  background-color: $blue;
+  margin-left: 0.15rem;
+  border: none;
+  font-size: 16px;
+  padding: 21px 13px 16px;
+  transform: translateY(-20px);
+  border-radius: 4px;
+}
+
+.add-button-dusk {
+  background-color: $orange;
   margin-left: 0.15rem;
   border: none;
   font-size: 16px;
