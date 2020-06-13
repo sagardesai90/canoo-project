@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Lights.scss";
+import deleteIcon from "../delete.png";
 
 export default class Lights extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class Lights extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.addRoom = this.addRoom.bind(this);
     this.getNewData = this.getNewData.bind(this);
+    this.deleteLight = this.deleteLight.bind(this);
   }
   componentDidMount() {
     fetch("http://localhost:5000/").then((res) =>
@@ -28,6 +30,21 @@ export default class Lights extends Component {
 
     let switchLight = await fetch("http://localhost:5000/switch", {
       method: "PUT",
+      cache: "no-cache",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ room: [roomKey, this.state.rooms[roomKey]] }),
+    })
+      .then(() => this.getNewData())
+      .catch((error) => console.log(error, "error"));
+  }
+
+  async deleteLight(roomKey) {
+    let rooms = Object.keys(this.state.rooms);
+    let deleteRoom = await fetch("http://localhost:5000/switch", {
+      method: "DELETE",
       cache: "no-cache",
       headers: {
         "Content-Type": "application/json",
@@ -82,6 +99,12 @@ export default class Lights extends Component {
                       : "room-name"
                   }
                 >
+                  <img
+                    onClick={() => this.deleteLight(roomNames[i])}
+                    src={deleteIcon}
+                    className="delete"
+                    alt="delete"
+                  />
                   {roomNames[i]}
                   <div
                     className={

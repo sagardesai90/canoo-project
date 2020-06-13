@@ -20,6 +20,18 @@ def add_light(name):
     return light_data
 
 
+def delete_light_db(name):
+    with open('homeState.json', 'r') as json_file:
+        light_data = json.load(json_file)
+    light_data['rooms'].pop(name, None)
+    print("Light removed from", name)
+    with open('homeState.json', 'w') as json_file:
+        json.dump(light_data, json_file, indent=4)
+    with open('homeState.json', 'r') as json_file:
+        light_data = json.load(json_file)
+    return light_data
+
+
 def adjust_temp(temp):
     with open('homeState.json', 'r') as json_file:
         temp_data = json.load(json_file)
@@ -64,6 +76,7 @@ def get_data():
 @cross_origin(origin='*')
 def switch():
     json_payload = request.json["room"][0]
+    print(json_payload, "json_payload")
     light_switch(json_payload)
     return json_payload
 
@@ -75,6 +88,14 @@ def add():
     add_light(json_payload)
 
     return json_payload
+
+
+@app.route('/switch', methods=['DELETE'])
+@cross_origin(origin='*')
+def delete_light():
+    deleted_light = request.json["room"][0]
+    delete_light_db(deleted_light)
+    return deleted_light
 
 
 @app.route('/adjust_temp', methods=["PUT"])
